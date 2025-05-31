@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Login Form</title>
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <div class="title"><span>Login Form</span></div>
+
+    <!-- Login Form -->
+    <form id="login-form" onsubmit="handleLogin(event)">
+      <div class="row">
+        <i class="fas fa-user"></i>
+        <input type="text" id="username" placeholder="Username" required />
+      </div>
+      <div class="row">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" required />
+      </div>
+      <div class="pass"><a href="#" onclick="showResetForm()">Forgot password?</a></div>
+      <div class="row button">
+        <input type="submit" value="Login" />
+      </div>
+      <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+    </form>
+
+    <!-- Reset Password Form -->
+    <form id="reset-form" style="display: none;" onsubmit="handleReset(event)">
+      <div class="title"><span>Reset Password</span></div>
+      <div class="row">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="reset-email" placeholder="Enter your email" required />
+      </div>
+      <div class="row button">
+        <input type="submit" value="Reset Password" />
+      </div>
+      <div class="back-link"><a href="#" onclick="showLoginForm()">Back to Login</a></div>
+    </form>
+  </div>
+
+  <script>
+    
+    function handleLogin(event) {
+      event.preventDefault(); 
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      
+      if (username === 'user123' && password === 'pass123') {
+        sessionStorage.setItem('loggedIn', 'true'); 
+        alert('Login successful!');
+        window.location.href = 'index.html'; // Redirect to the main project page
+      } else {
+        alert('Incorrect username or password.');
+      }
+    }
+    function showResetForm() {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('reset-form').style.display = 'block';
+    }
+    function handleReset(event) {
+      event.preventDefault();
+      const email = document.getElementById('reset-email').value;
+      
+      alert(`Password reset link sent to ${email}`);
+      showLoginForm(); 
+    }
+    function showLoginForm() {
+      document.getElementById('reset-form').style.display = 'none';
+      document.getElementById('login-form').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
